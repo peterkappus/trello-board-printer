@@ -1,68 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-<meta charset="utf-8" />
-<meta name="author" content="TiansHUo tianshuo_at_gmail_dot_com" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="icon" type="image/png" href="images/favicon.png">
 
-<!-- Nah, use helvetica -->
-<!--link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">-->
+    <title>Trello Board Printer</title>
 
-<link rel="stylesheet" href="css/normalize.css">
-<link rel="stylesheet" href="css/skeleton1200.css">
+    <!--link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css"-->
+    <link rel="stylesheet" href="css/pure-min.css">
+    <link rel="stylesheet" href="css/custom.css">
 
-<link rel="icon" type="image/png" href="images/favicon.png">
+		<script type="text/javascript" src="js/vendor/jquery-1.7.1.min.js"></script>
 
-<title>Export Trello Docs</title>
-<script type="text/javascript" src="js/vendor/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="https://api.trello.com/1/client.js?key=f1cfdc1ed1555da721f28490bcbbd26b"></script><!-- Please use your own key-->
-<script type="text/javascript" src="js/vendor/jquery-ui-1.8.11.custom.min.js"></script>
-<script type="text/javascript" src="js/vendor/jquery.masonry.min.js"></script>
-<script type="text/javascript" src="js/vendor/underscore-min.js"></script>
-<script type="text/javascript" src="js/vendor/mustache.js"></script>
-<script type="text/javascript" src="js/vendor/blobbuilder.js"></script>
-<script type="text/javascript" src="js/vendor/filesaver.js"></script>
-<script type="text/javascript" src="js/vendor/showdown.js"></script>
-<script type="text/javascript" src="js/trello_docs.js"></script>
+		<!-- Please use your own key-->
+		<script type="text/javascript" src="https://api.trello.com/1/client.js?key=143e73e8419f1e652300305f4bf0e0e6"></script>
 
-<style type="text/css">
+		<script type="text/javascript" src="js/vendor/jquery-ui-1.8.11.custom.min.js"></script>
+		<script type="text/javascript" src="js/vendor/jquery.masonry.min.js"></script>
+		<script type="text/javascript" src="js/vendor/underscore-min.js"></script>
+		<script type="text/javascript" src="js/vendor/mustache.js"></script>
+		<script type="text/javascript" src="js/vendor/blobbuilder.js"></script>
+		<script type="text/javascript" src="js/vendor/filesaver.js"></script>
+		<script type="text/javascript" src="js/vendor/showdown.js"></script><!--for markdown rendering of card descriptions-->
+		<script type="text/javascript" src="js/trello_docs.js"></script>
+</head>
 
-body {
-  background: #005ea5;
-  color: #fff;
-}
-
-.column_header {
-	border-bottom: 1px solid #fff;
-	padding-bottom: 1rem;
-}
-
-.card {
-	display: block;
-	line-height: 1.5rem;
-	margin-bottom: 1.8rem;
-}
-
-a:visited {
-	color: #99f;
-}
-
-a{
-	color: #fff;
-}
-ul {
-	list-style-type: none;
-}
-
-</style>
 
 </head>
 <body>
 
-	<div class="container">
 		<div id="view">
 		</div>
-  </div>
 
 </body>
 </html>

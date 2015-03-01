@@ -42,6 +42,7 @@ var initDoc=function () {
 };
 
 var router=function(){
+  //strip of # from hash
 	var hash=location.hash.replace("#","");
 	if (hash!=="")
 	{
@@ -80,7 +81,10 @@ var listBoards=function(){
 	}
 
 	$("#view").empty();
-	var template="<div class='row'><div class='twelve columns'><h1>{{fullName}} ({{username}})</h1></div></div><div class='row'>{{#orgBoards}}<div class='four columns'><h2 class='column_header'>{{name}}</h2>{{#boards}}<a href='#{{id}}' class='card'>{{name}}</a>{{/boards}}</div>{{/orgBoards}}</div>";
+  //this is insasne. Can we do this with a nice tidy Jade template or something else?
+  //Also, I'm doing something weird here, which is that I'm rendering all the titles, then rendering
+  var template= "<h1>{{fullName}} ({{username}})</h1><div class='pure-g'>{{#orgBoards}}<div class='pure-u-1-4'><div class='column_header'><h2>{{name}}</h2></div></div><!--end board names-->{{/orgBoards}}</div><!--start boards--><div class='pure-g'>{{#orgBoards}}<div class='pure-u-1-4'><div class='column'>{{#boards}}<a href='#{{id}}' class='card'>{{name}}</a>{{/boards}}</div></div>{{/orgBoards}}</div>";
+	//var template="<h1>{{fullName}} ({{username}})</h1><div class='pure-g'>{{#orgBoards}}<div class='pure-u-1-4'><div class='with_margin'><h2 class='column_header'>{{name}}</h2>{{#boards}}<a href='#{{id}}' class='card'>{{name}}</a>{{/boards}}</div></div>{{/orgBoards}}</div>";
 	var str=Mustache.render(template,myself);
 	$("#view").html(str);
 	$("#boardlist").masonry({
@@ -93,7 +97,7 @@ var getBoard=function(board){
   $("#view").empty();
   $("#view").html("<h1>Loading ...</h1>");
   Trello.get("/boards/"+board,{cards:"open",lists:"open",checklists:"all",members:"all"},function(board){
-	$("#view").html("<h1>Loading ...OK!!</h1>");
+	$("#view").html("<h1>Loading ...OK!</h1>");
 	window.doc=board; //debug
 	window.title=board.name;
 	_.each(board.cards,function(card){ //iterate on cards
@@ -160,16 +164,18 @@ var getBoard=function(board){
 			return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
 		};
 	};
+
 	board.formatComments=function(){
 		var converter = new Showdown.converter();
 		return converter.makeHtml;
 	};
-	//
+
+  //
 	// Start Rendering
 	//board.displayColumns=["Name","Description","Due Date","Checklists","Members","Labels","Votes"];
 	//var htmltemplate="<h1><span id='download'></span><span id='trello-link'></span><span id='printme'></span>{{name}} <span class='right'>{{#formatDate}}now{{/formatDate}}</span></h1>{{#lists}}<table><caption><h2>{{name}} <span class='show right'>{{size}}</span></h2></caption>{{#show}}<col width='20%' /><col width='30%' /><col width='5%' /><col width='25%' /><col width='5%' /><col width='10%' /><col width='5%' /><thead><tr>{{#displayColumns}}<th scope='col'>{{.}}</th>{{/displayColumns}}</tr></thead>{{/show}}<tbody>{{#cards}}<tr><td scope='row'><b>{{name}}</b></td><td><div class='comments'>{{#formatComments}}{{desc}}{{/formatComments}}</div></td><td>{{#formatDate}}{{due}}{{/formatDate}}</td><td>{{#checklist}}<div>{{{.}}}</div>{{/checklist}}</td><td>{{#members}}<div>{{.}}</div>{{/members}}</td><td>{{#labels}}<div class='show {{color}}'>{{name}}&nbsp;</div>{{/labels}}</td><td>{{badges.votes}}</td></tr>{{/cards}}</tbody></table>{{/lists}}";
 
-  var htmltemplate="<div class='row'><div class='twelve columns'> <!--<a href='#' id='download' class='button'></a> <a href='#' id='trello-link' class='button'></a> <a href='#' id='printme' class='button'></a>--> <h1>{{name}}</h1> <h4 class=''>{{#formatDate}}now{{/formatDate}}</h4></div></div><div class='row'>{{#lists}}<div class='four columns'><h2 class='column_header'>{{name}} <span class='show right'>{{size}}</span></h2>{{#cards}}<span class='card'>{{name}}</span>{{/cards}}</div>{{/lists}}</div>";
+  var htmltemplate="<!--<a href='#' id='download' class='button'></a> <a href='#' id='trello-link' class='button'></a> <a href='#' id='printme' class='button'></a>--> <h1>{{name}}</h1> <div class='date'>{{#formatDate}}now{{/formatDate}}</div><div class='pure-g'>{{#lists}}<div class='pure-u-1-5'><div class='column_header'><h2>{{name}} <!--span class='show right'>{{size}}</span--></h2></div></div>{{/lists}}</div><div class='pure-g'>{{#lists}}<div class='pure-u-1-5'><div class='column'>{{#cards}}<span class='card'>{{name}}</span>{{/cards}}</div></div>{{/lists}}</div>";
 	var csvtemplate="";//TODO
 
 	var str=Mustache.render(htmltemplate,board);
@@ -203,5 +209,20 @@ var getBoard=function(board){
 	});
 
 	//button.click(function(){location.href="data:text/html;charset=utf-8,"+encodeURIComponent(download);});
+
+
+  //Add milestone class to cards which start with "MILESTONE:"
+  $( '.card' ).each( function()
+  {
+    //refactor this!
+    if($(this).text().match(/^MILESTONE:/)) {
+        $(this).addClass( 'milestone' );
+    }
+    if($(this).text().match(/^RISK:/)) {
+        $(this).addClass( 'risk' );
+    }
+
+  } );
+
 	});
 };

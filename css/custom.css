@@ -1,0 +1,78 @@
+body {
+	font-size: 1.2em; /* currently ems cause chrome bug misinterpreting rems on body element */
+	line-height: 1.6;
+	font-weight: 400;
+	font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+@media screen {
+	body{
+		background: #005ea5;
+		color: #fff;
+	}
+	.column {
+		border-top: 1px solid #fff;
+	}
+
+}
+
+@media print {
+	body{
+		background: #ff0;
+		color: #000;
+	}
+
+	.column {
+		border-top: 1px solid #000;
+	}
+
+  .risk, .milestone{
+    border-left: 3px solid #000;
+  }
+}
+
+
+#view {
+  width: 90%;
+  margin:0 auto;
+}
+
+.column, .column_header {
+	/*height: 100px;*/
+  padding-top: 1rem;
+  margin-right: 1rem;
+}
+
+.card {
+	display: block;
+	font-size: 1rem;
+	margin-bottom: 1.4rem;
+}
+
+.card.milestone {
+  background: #237;
+  padding: .5rem;
+}
+
+.card.risk{
+  background: #c33;
+  padding: .5rem;
+
+}
+
+a:visited {
+	color: #fff;
+}
+
+a{
+	color: #fff;
+  text-decoration: none
+}
+
+a:hover{
+  text-decoration: underline;
+}
+
+h1, h2 {
+  margin-bottom: .3rem;
+}
