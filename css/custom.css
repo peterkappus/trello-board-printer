@@ -31,16 +31,18 @@ body {
   }
 }
 
+.wide{
+  white-space: nowrap;
+}
 
 #view {
   width: 90%;
-  margin:0 auto;
+  margin: 0 auto;
 }
 
 .column, .column_header {
-	/*height: 100px;*/
   padding-top: 1rem;
-  margin-right: 1rem;
+  margin-right: 2.5rem;
 }
 
 .card {
