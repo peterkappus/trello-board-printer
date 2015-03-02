@@ -192,15 +192,6 @@ var getBoard=function(board){
 	//board.displayColumns=["Name","Description","Due Date","Checklists","Members","Labels","Votes"];
 	//var htmltemplate="<h1><span id='download'></span><span id='trello-link'></span><span id='printme'></span>{{name}} <span class='right'>{{#formatDate}}now{{/formatDate}}</span></h1>{{#lists}}<table><caption><h2>{{name}} <span class='show right'>{{size}}</span></h2></caption>{{#show}}<col width='20%' /><col width='30%' /><col width='5%' /><col width='25%' /><col width='5%' /><col width='10%' /><col width='5%' /><thead><tr>{{#displayColumns}}<th scope='col'>{{.}}</th>{{/displayColumns}}</tr></thead>{{/show}}<tbody>{{#cards}}<tr><td scope='row'><b>{{name}}</b></td><td><div class='comments'>{{#formatComments}}{{desc}}{{/formatComments}}</div></td><td>{{#formatDate}}{{due}}{{/formatDate}}</td><td>{{#checklist}}<div>{{{.}}}</div>{{/checklist}}</td><td>{{#members}}<div>{{.}}</div>{{/members}}</td><td>{{#labels}}<div class='show {{color}}'>{{name}}&nbsp;</div>{{/labels}}</td><td>{{badges.votes}}</td></tr>{{/cards}}</tbody></table>{{/lists}}";
 
-  //var htmltemplate="<!--<a href='#' id='download' class='button'></a> <a href='#' id='trello-link' class='button'></a> <a href='#' id='printme' class='button'></a>--> <h1>{{name}}</h1> <div class='date'>{{#formatDate}}now{{/formatDate}}</div><div>{{#lists}}<div class='column_header'><h2>{{name}} <!--span class='show right'>{{size}}</span--></h2></div>{{/lists}}</div><div>{{#lists}}<div class='column'>{{#cards}}<span class='card'>{{name}}</span>{{/cards}}</div>{{/lists}}</div>";
-
-  //bad wrapping of headers
-  //var htmltemplate="<!--<a href='#' id='download' class='button'></a> <a href='#' id='trello-link' class='button'></a> <a href='#' id='printme' class='button'></a>--><h1>{{name}}</h1> <div class='date'>{{#formatDate}}now{{/formatDate}}</div><div class='pure-g wide'>{{#lists}}<div class='pure-u-1-5'><div class='column_header'><h2>{{name}} <!--span class='show right'>{{size}}</span--></h2></div></div>{{/lists}}</div><div class='pure-g'>{{#lists}}<div class='pure-u-1-5'><div class='column'>{{#cards}}<span class='card'>{{name}}</span>{{/cards}}</div></div>{{/lists}}</div>";
-
-  //size columns based on number of boards so they always fit... can get really skinny :(
-  //var htmltemplate="<h1>{{name}}</h1><div class='date'>{{#formatDate}}now{{/formatDate}}</div><div class='pure-g'>{{#lists}}<div class='pure-u-1-" + board.lists.length +"'><div class='column_header'><h2>{{name}} <!--span class='show right'>{{size}}</span--></h2></div><div class='column'>{{#cards}}<span class='card'>{{name}}</span>{{/cards}}</div></div>{{/lists}}</div>";
-
-  var htmltemplate="<div class='pure-g'><div class='pure-u-3-4'><h1>{{name}}</h1></div><div class='pure-u-1-4 date'><div class='column_header'>{{#formatDate}}now{{/formatDate}}</div></div><div class='pure-u-4-4'><div class='pure-g'>{{#lists}}<div class='pure-u-1-4'><div class='column_header'><h2>{{name}}</h2></div><div class='column'>{{#cards}}<span class='card'>{{name}}</span>{{/cards}}</div></div>{{/lists}}</div>";
 	var csvtemplate="";//TODO
 
 	var str=Mustache.render(templates['cards'],board);
@@ -220,12 +211,7 @@ var getBoard=function(board){
 		bb.append(download);
 		var filesaver=saveAs(bb.getBlob("text/html;charset=utf-8"),board.name+"_"+board.formatDate()('now')+".html");
 	});
-		var button2=$("#trello-link");
-	button2.addClass("downloader");
-	button2.text("Trello");
-	button2.click(function(){
-		location=board.url;
-	});
+
 	var button3=$("#printme");
 	button3.addClass("downloader");
 	button3.text("Print");

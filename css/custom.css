@@ -73,6 +73,10 @@ body{
     text-align:right;
 }
 
+h1 a{
+  color:#000;
+}
+
 a{
   text-decoration: none
 }
