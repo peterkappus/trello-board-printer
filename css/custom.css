@@ -5,13 +5,13 @@ body {
 	font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-@media screen {
+/*@media screen {
 	body{
 		background: #005ea5;
-		color: #fff;
+		color: #000;
 	}
 	.column {
-		border-top: 1px solid #fff;
+		border-top: 1px solid #000;
 	}
 
 }
@@ -30,6 +30,29 @@ body {
     border-left: 3px solid #000;
   }
 }
+*/
+
+body{
+  color: #000;
+}
+
+.column {
+  border-top: 1px solid #000;
+}
+
+.risk, .milestone{
+  padding: .5rem;
+  background: #DEE0E2;
+}
+
+.milestone {
+  border-left: 3px solid #2B8CC4;
+}
+
+
+.risk{
+  border-left: 3px solid #DF3034;
+}
 
 .wide{
   white-space: nowrap;
@@ -42,32 +65,33 @@ body {
 
 .column, .column_header {
   padding-top: 1rem;
-  margin-right: 2.5rem;
+  margin-right: 2.2rem;
+}
+
+/* Make lists wrap below the shortest adjacent list (rather than stating a new row)*/
+/* disable the "display: webkit-flex" property set by pure */
+/* NOTE! may not work in all browsers... need to test. I'm using Chrome */
+.pure-g {
+  display: block;
+}
+
+.pure-g [class *="pure-u"] {
+    float: left;
+    display: block;
 }
 
 .card {
 	display: block;
 	font-size: 1rem;
-	margin-bottom: 1.4rem;
+  line-height: 1.4rem;
+	margin-bottom: 1.2rem;
 }
 
-.card.milestone {
-  background: #237;
-  padding: .5rem;
-}
-
-.card.risk{
-  background: #c33;
-  padding: .5rem;
-
-}
 
 a:visited {
-	color: #fff;
 }
 
 a{
-	color: #fff;
   text-decoration: none
 }
 
