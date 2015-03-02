@@ -98,15 +98,11 @@ var listBoards=function(){
 	}
 
 	$("#view").empty();
-  //this is insasne. Can we do this with a nice tidy Jade template or something else?
-  //Also, I'm doing something weird here, which is that I'm rendering all the titles, then rendering
-  var template= "<h1>{{fullName}} ({{username}})</h1><div class='pure-g'>{{#orgBoards}}<div class='pure-u-1-4'><div class='column_header'><h2>{{name}}</h2></div></div><!--end board names-->{{/orgBoards}}</div><!--start boards--><div class='pure-g'>{{#orgBoards}}<div class='pure-u-1-4'><div class='column'>{{#boards}}<a href='#{{id}}' class='card'>{{name}}</a>{{/boards}}</div></div>{{/orgBoards}}</div>";
-	//var template="<h1>{{fullName}} ({{username}})</h1><div class='pure-g'>{{#orgBoards}}<div class='pure-u-1-4'><div class='with_margin'><h2 class='column_header'>{{name}}</h2>{{#boards}}<a href='#{{id}}' class='card'>{{name}}</a>{{/boards}}</div></div>{{/orgBoards}}</div>";
-	var str=Mustache.render(template,myself);
+	var str=Mustache.render(templates['boards'],myself);
 	$("#view").html(str);
-	$("#boardlist").masonry({
+	/*$("#boardlist").masonry({
 		itemSelector:'.list'
-	});
+	});*/
 
 };
 

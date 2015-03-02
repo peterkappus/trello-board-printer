@@ -1,0 +1,21 @@
+<h1>Trello User: {{fullName}} ({{username}})</h1>
+
+  <div class='pure-g'>
+    {{#orgBoards}}
+
+    <div class='pure-u-1-4'>
+      <div class='column_header'>
+        <h2>{{name}}</h2>
+      </div>
+    </div><!--end board names-->{{/orgBoards}}
+  </div><!--start boards-->
+
+  <div class='pure-g'>
+    {{#orgBoards}}
+
+    <div class='pure-u-1-4'>
+      <div class='column'>
+        {{#boards}}<a href='#{{id}}' class='card'>{{name}}</a>{{/boards}}
+      </div>
+    </div>{{/orgBoards}}
+  </div>
