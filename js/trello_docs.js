@@ -5,6 +5,23 @@ if (typeof console === "undefined" || typeof console.log === "undefined") { //Fi
 }
 
 $(document).ready(function(){
+
+  //utilities for loading mustache from external files
+  //Thanks Chris Hill-Scott :)
+  window.templates = {};
+
+  $.each([
+    "boards",
+    "cards"
+  ],function(i, templateName) {
+    var templateFolder = "templates/";
+    var fileExtension = ".mustache";
+    $.get(templateFolder + templateName + fileExtension, function(data){
+      window.templates[templateName] = data;
+    });
+  });
+
+
 	var defaultOptions = {
         scope: {
             write: false
@@ -183,10 +200,10 @@ var getBoard=function(board){
   //size columns based on number of boards so they always fit... can get really skinny :(
   //var htmltemplate="<h1>{{name}}</h1><div class='date'>{{#formatDate}}now{{/formatDate}}</div><div class='pure-g'>{{#lists}}<div class='pure-u-1-" + board.lists.length +"'><div class='column_header'><h2>{{name}} <!--span class='show right'>{{size}}</span--></h2></div><div class='column'>{{#cards}}<span class='card'>{{name}}</span>{{/cards}}</div></div>{{/lists}}</div>";
 
-  var htmltemplate="<h1>{{name}}</h1><div class='date'>{{#formatDate}}now{{/formatDate}}</div><div class='pure-g'>{{#lists}}<div class='pure-u-1-4'><div class='column_header'><h2>{{name}} <!--span class='show right'>{{size}}</span--></h2></div><div class='column'>{{#cards}}<span class='card'>{{name}}</span>{{/cards}}</div></div>{{/lists}}</div>";
+  var htmltemplate="<div class='pure-g'><div class='pure-u-3-4'><h1>{{name}}</h1></div><div class='pure-u-1-4 date'><div class='column_header'>{{#formatDate}}now{{/formatDate}}</div></div><div class='pure-u-4-4'><div class='pure-g'>{{#lists}}<div class='pure-u-1-4'><div class='column_header'><h2>{{name}}</h2></div><div class='column'>{{#cards}}<span class='card'>{{name}}</span>{{/cards}}</div></div>{{/lists}}</div>";
 	var csvtemplate="";//TODO
 
-	var str=Mustache.render(htmltemplate,board);
+	var str=Mustache.render(templates['cards'],board);
 	$("#view").html(str);
 
 	// Download Button
