@@ -20,18 +20,26 @@ body{
   font-size: 1rem;
 }
 
-.risk, .milestone{
+.special{
   padding: .5rem;
-  background: #DEE0E2;
+  background: #F8F8F8;
+}
+
+.question {
+	border-left: 3px solid #85994B;
+
+}
+.danger{
+	text: #300;
+	border-left: 3px solid #DF3034;
 }
 
 .milestone {
   border-left: 3px solid #2B8CC4;
 }
 
-
 .risk{
-  border-left: 3px solid #DF3034;
+  border-left: 3px solid #FFBF47;
 }
 
 .wide{
@@ -67,13 +75,12 @@ body{
 	margin-bottom: 1.2rem;
 }
 
-
 .date {
     font-size: 1.2rem;
     text-align:right;
 }
 
-h1 a{
+h1 a, h1 a:visited{
   color:#000;
 }
 

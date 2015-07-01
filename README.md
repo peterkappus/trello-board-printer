@@ -8,3 +8,7 @@ NOTES:
 This needs to run via a hosted instance (e.g. not by just opening the HTML file). If you have python installed, this is easy, just CD into the directory with your code and do this:
 
 `python -m SimpleHTTPServer 8000`
+
+TODO
+==
+...

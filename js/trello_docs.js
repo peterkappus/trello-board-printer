@@ -26,6 +26,7 @@ $(document).ready(function(){
         scope: {
             write: false
         },
+        name: 'Board Printer',
         success: initDoc
     };
 	if(typeof Trello==="undefined") {
@@ -112,7 +113,7 @@ var getBoard=function(board){
   Trello.get("/boards/"+board,{cards:"open",lists:"open",checklists:"all",members:"all"},function(board){
 	$("#view").html("<h1>Loading ...OK!</h1>");
 	window.doc=board; //debug
-	window.title=board.name;
+	document.title=board.name; //why isn't this working?
 	_.each(board.cards,function(card){ //iterate on cards
 		_.each(card.idChecklists,function(listId){ //iterate on checklists
 			var list=_.find(board.checklists,function(check){ //Find list
@@ -174,7 +175,7 @@ var getBoard=function(board){
 			default:
 				date=new Date(text);
 			}
-			return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+			return date.toLocaleDateString(); //date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
 		};
 	};
 
@@ -218,16 +219,26 @@ var getBoard=function(board){
 	//button.click(function(){location.href="data:text/html;charset=utf-8,"+encodeURIComponent(download);});
 
 
-  //Add milestone class to cards which start with "MILESTONE:"
+  //search for keywords and add classes to identified cards
   $( '.card' ).each( function()
   {
-    //refactor this!
-    if($(this).text().match(/^MILESTONE:/)) {
-        $(this).addClass( 'milestone' );
-    }
-    if($(this).text().match(/^RISK:/)) {
-        $(this).addClass( 'risk' );
-    }
+    //search for these keywords to appear anywhere within the cards.
+    //The first element of the array is the string to find
+    //the second is the name of the class to be applied
+    keywords =[['MILESTONE','milestone'],['RISK','risk'],['QUESTION','question'],['!','danger'],['\\?','question']];
+
+    var card = $(this);
+    //check each card to see if it contains one of the keywords above
+    keywords.forEach(function(pair){
+      if(card.text().match(pair[0])) {
+          //if so, add the corresponding class
+          //all special cards get this class
+          card.addClass('special');
+          //custom class for this "type" of special card
+          card.addClass( pair[1] );
+      }
+
+    });
 
   } );
 
